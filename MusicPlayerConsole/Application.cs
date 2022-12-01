@@ -2,8 +2,8 @@
 {
     public class Application
     {
-        public string selectedChoice;
-        public void SelectOption()
+        public static string selectedChoice;
+        public static void SelectOption()
         {
             Console.WriteLine("1. Show All Songs");
             Console.WriteLine("2. Add Song");
@@ -13,7 +13,7 @@
             Console.WriteLine("6. Create A playlist");
             Console.WriteLine("7. Exit");
         }
-        public void Start()
+        public static void Start()
         {
             Console.Title = "My Music Player";
             Console.WriteLine("*****Welcome to my Music Player App*****");
@@ -42,9 +42,6 @@
                     case "6":
                         PlayList.createPlaylist();
                         break;
-
-
-
                 }
 
             } while (selectedChoice != "7");

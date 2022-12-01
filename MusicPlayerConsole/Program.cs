@@ -5,8 +5,8 @@
         static void Main(string[] args)
         {
 
-            Application application = new Application();
-            application.Start();
+            Application.Start();
+            
 
             //ERROR HANDLING 
 

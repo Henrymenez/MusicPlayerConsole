@@ -21,7 +21,17 @@
                 Console.WriteLine($"{count} {song.Name} by {song.ArtistName}");
             }
             Console.WriteLine("----------------------- \n");
-
+            Console.WriteLine("Play song: \n 1. In exact order \n 2. Alphabetical order");
+            string playChoice = Console.ReadLine();
+            while (true)
+            {
+                switch (playChoice)
+                {
+                    case "1":
+                        PlaySong();
+                        break;
+                }
+            }
         }
         public static void AddSong()
         {
@@ -63,7 +73,44 @@
             Console.WriteLine("----------------------- \n");
         }
 
+        public static void PlaySong(int index = 0)
+        {
+            List<string> playMusic = new List<string>();
+            while (true)
+            {
+                foreach (Song song in songs)
+                {
+                    playMusic.Add($"Now Playing {song.Name} by {song.ArtistName}");
 
+                }
+
+                Console.WriteLine(playMusic.ElementAt(index));
+                Console.WriteLine("\n \nEnter No:\n" +
+                   "1:  Previous \n" +
+                   "2: Next \n" +
+                   "0: To Return to Main Menu");
+                string input = Console.ReadLine();
+                switch(input)
+                {
+                    case "0":
+                        Console.Clear();
+                        Application.Start();
+                        break;
+                    case "1":
+                        Console.Clear();
+                        Console.WriteLine(playMusic.ElementAt(index - 1));
+                        break;
+                    case "2":
+                        Console.Clear();
+                        Console.WriteLine(playMusic.ElementAt(index + 1));
+                        break;
+                }
+                
+            }
+            
+           
+
+        }
 
     }
 
