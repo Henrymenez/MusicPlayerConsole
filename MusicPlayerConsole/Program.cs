@@ -9,6 +9,7 @@
             application.Start();
 
 
+
             /*TODO LIST
              * Create a music player console application
              * User can add ,edit and remove songs
