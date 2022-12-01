@@ -18,10 +18,27 @@
             Console.Title = "My Music Player";
             Console.WriteLine("*****Welcome to my Music Player App*****");
             Console.WriteLine("What would you like to do ");
-            do
+            
+            bool IsAlive = true;
+            while (IsAlive)
             {
                 SelectOption();
                 selectedChoice = Console.ReadLine();
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(selectedChoice))
+                    {
+                        throw new InvalidInput("Invalid Input");
+                    }
+
+                }
+                catch (InvalidInput ex)
+                {
+                    Console.WriteLine(ex.Message + "Please select a valid option \n");
+
+                 
+                }
+
                 switch (selectedChoice)
                 {
                     case "1":
@@ -42,9 +59,17 @@
                     case "6":
                         PlayList.createPlaylist();
                         break;
+                    case "7":
+                        Console.WriteLine("Thank you, bye");
+                        IsAlive = false;
+                        break;
+                    default:
+                        Console.WriteLine("Please select valid option");
+                        break;
                 }
 
-            } while (selectedChoice != "7");
+
+            }
 
 
 

@@ -21,30 +21,62 @@
                 Console.WriteLine($"{count} {song.Name} by {song.ArtistName}");
             }
             Console.WriteLine("----------------------- \n");
-            Console.WriteLine("Play song: \n 1. In exact order \n 2. Alphabetical order");
+            Console.WriteLine("Play song: \n 1. In exact order \n 2. Alphabetical order \n 3. Shuffle \n 0. Main Menu");
             string playChoice = Console.ReadLine();
-            while (true)
+            bool IsAlive = true;
+            while (IsAlive)
             {
                 switch (playChoice)
                 {
+                    case "0":
+                        Console.Clear();
+                        IsAlive = false;
+                        Application.Start();
+                        break;
                     case "1":
                         PlaySong();
+                        break;
+                    default:
+                        Console.WriteLine("Please select valid option \n");
+                        Console.WriteLine("Play song: \n 1. In exact order \n 2. Alphabetical order \n 3. Shuffle \n 0. Main Menu");
+                        playChoice = Console.ReadLine();
                         break;
                 }
             }
         }
         public static void AddSong()
         {
-            Console.Clear();
-            Console.Write("Song Name: ");
-            string name = Console.ReadLine();
-            Console.Write("Artist Name: ");
-            string artistName = Console.ReadLine();
+            try
+            {
+                bool IsAlive = true;
 
-            int newId = songs.Last().ID + 1;
-            songs.Add(new Song(newId, name, artistName));
-            Console.WriteLine("Your Song Have been added successfully ");
-            Console.WriteLine("----------------------- \n");
+                while (IsAlive)
+                {
+                    Console.Write("Song Name: ");
+                    string name = Console.ReadLine();
+                    Console.Write("Artist Name: ");
+                    string artistName = Console.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(artistName))
+                    {
+                        throw new InvalidInput("Invalid Input");
+
+                    }
+                    int newId = songs.Last().ID + 1;
+                    songs.Add(new Song(newId, name, artistName));
+                    Console.WriteLine("Your Song Have been added successfully ");
+                    Console.WriteLine("----------------------- \n");
+                    IsAlive = false;
+                }
+
+
+            }
+            catch (InvalidInput ex)
+            {
+                Console.WriteLine(ex.Message + "Please select valid imput");
+            }
+
+
         }
         public static void RemoveSong()
         {
@@ -52,25 +84,56 @@
             Console.Write("Song Id you want to remove: ");
             int id = Convert.ToInt32(Console.ReadLine());
             var itemToRemove = songs.FirstOrDefault(item => item.ID == id);
-            songs.Remove(itemToRemove);
-            Console.WriteLine("Your Song Have been removed successfully");
-            Console.WriteLine("----------------------- \n");
+            if (itemToRemove != null)
+            {
+                songs.Remove(itemToRemove);
+                Console.WriteLine("Your Song Have been removed successfully");
+                Console.WriteLine("----------------------- \n");
+            }
+            Console.WriteLine("Invalid Id");
         }
 
         public static void EditSong()
         {
-            Console.Clear();
-            Console.Write("Song Id you want to Edit: ");
-            int id = Convert.ToInt32(Console.ReadLine());
-            Console.Write("New Song Name: ");
-            string name = Console.ReadLine();
-            Console.Write("New Artist Name: ");
-            string artistName = Console.ReadLine();
-            var itemToEdit = songs.FirstOrDefault(item => item.ID == id);
-            itemToEdit.ArtistName = artistName;
-            itemToEdit.Name = name;
-            Console.WriteLine("Your Song Have been removed successfully");
-            Console.WriteLine("----------------------- \n");
+            try
+            {
+                Console.Clear();
+                Console.Write("Song Id you want to Edit: ");
+                int id = Convert.ToInt32(Console.ReadLine());
+                Console.Write("New Song Name: ");
+                string name = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new InvalidInput("Please Insert a valid input");
+
+            }
+               Console.Write("New Artist Name: ");
+                string artistName = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(artistName))
+                {
+                    throw new InvalidInput("Please Insert a valid input");
+
+                }
+
+                var itemToEdit = songs.FirstOrDefault(item => item.ID == id);
+                if (itemToEdit != null)
+                {
+                    itemToEdit.ArtistName = artistName;
+                    itemToEdit.Name = name;
+                    Console.WriteLine("Your Song Have been edited successfully");
+                    Console.WriteLine("----------------------- \n");
+                }
+                throw new InvalidInput("Invalid Id");
+            }
+            catch (InvalidInput ex)
+            {
+                Console.WriteLine(ex.Message + " Please Insert a valid input");
+            }
+          /*  catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + " Something went wrong");
+            }*/
+
         }
 
         public static void PlaySong(int index = 0)
@@ -90,7 +153,7 @@
                    "2: Next \n" +
                    "0: To Return to Main Menu");
                 string input = Console.ReadLine();
-                switch(input)
+                switch (input)
                 {
                     case "0":
                         Console.Clear();
@@ -105,10 +168,10 @@
                         Console.WriteLine(playMusic.ElementAt(index + 1));
                         break;
                 }
-                
+
             }
-            
-           
+
+
 
         }
 
