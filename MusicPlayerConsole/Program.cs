@@ -8,7 +8,7 @@
             Application application = new Application();
             application.Start();
 
-
+            //ERROR HANDLING 
 
             /*TODO LIST
              * Create a music player console application

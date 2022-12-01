@@ -24,13 +24,26 @@
                 selectedChoice = Console.ReadLine();
                 switch (selectedChoice)
                 {
-                    case "6":
-                        PlayList.createPlaylist();
+                    case "1":
+                        MusicPlayer.ShowSongs();
+                        break;
+                    case "2":
+                        MusicPlayer.AddSong();
+                        break;
+                    case "3":
+                        MusicPlayer.EditSong();
+                        break;
+                    case "4":
+                        MusicPlayer.RemoveSong();
                         break;
                     case "5":
                         PlayList.DisplayPlaylist();
                         break;
-                   
+                    case "6":
+                        PlayList.createPlaylist();
+                        break;
+
+
 
                 }
 
