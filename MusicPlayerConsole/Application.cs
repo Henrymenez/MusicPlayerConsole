@@ -40,9 +40,17 @@
                     MusicPlayer.RemoveSong(id);
                     Console.WriteLine("-----------------------");
 
-                }else if(choice == "3") { 
-                
-                ''}
+                }else if(choice == "3") {
+                    Console.Clear();
+                    Console.Write("Song Id you want to Edit: ");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("New Song Name: ");
+                    string name = Console.ReadLine();
+                    Console.Write("New Artist Name: ");
+                    string artistName = Console.ReadLine();
+                    MusicPlayer.EditSong(id, name, artistName);
+                    Console.WriteLine("-----------------------");
+                }
             }
 
 

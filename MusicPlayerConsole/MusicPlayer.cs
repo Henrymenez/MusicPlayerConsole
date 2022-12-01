@@ -1,4 +1,6 @@
-﻿namespace MusicPlayerConsole
+﻿using System.Xml.Linq;
+
+namespace MusicPlayerConsole
 {
     public class MusicPlayer
     {
@@ -43,7 +45,15 @@
             songs.Remove(itemToRemove);
             Console.WriteLine("Your Song Have been removed successfully");
             ShowSongs();
+        }
 
+        public static void EditSong(int id,string name, string artistName)
+        {
+            var itemToEdit = songs.FirstOrDefault(item => item.ID == id);
+            itemToEdit.ArtistName = artistName;
+            itemToEdit.Name = name;
+            Console.WriteLine("Your Song Have been removed successfully");
+            ShowSongs();
         }
 
 
