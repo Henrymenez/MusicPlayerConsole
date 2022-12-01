@@ -9,6 +9,9 @@
             
 
             //ERROR HANDLING 
+            //still can next or prev
+            //unable to play song alphabet sort or shuffle
+            //ordered play not working well too
 
             /*TODO LIST
              * Create a music player console application
