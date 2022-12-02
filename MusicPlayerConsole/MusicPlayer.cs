@@ -138,39 +138,46 @@
 
         public static void PlaySong(int index = 0)
         {
-            List<string> playMusic = new List<string>();
-            while (true)
+            try
             {
-                foreach (Song song in songs)
+                List<string> playMusic = new List<string>();
+                while (true)
                 {
-                    playMusic.Add($"Now Playing {song.Name} by {song.ArtistName}");
+                    foreach (Song song in songs)
+                    {
+                        playMusic.Add($"Now Playing {song.Name} by {song.ArtistName}");
 
-                }
+                    }
 
-                Console.WriteLine(playMusic.ElementAt(index));
-                Console.WriteLine("\n \nEnter No:\n" +
-                   "1:  Previous \n" +
-                   "2: Next \n" +
-                   "0: To Return to Main Menu");
-                string input = Console.ReadLine();
-                switch (input)
-                {
-                    case "0":
-                        Console.Clear();
-                        Application.Start();
-                        break;
-                    case "1":
-                        Console.Clear();
-                        Console.WriteLine(playMusic.ElementAt(index - 1));
-                        break;
-                    case "2":
-                        Console.Clear();
-                        Console.WriteLine(playMusic.ElementAt(index + 1));
-                        break;
+                    Console.WriteLine(playMusic.ElementAt(index));
+                    Console.WriteLine("\n \nEnter No:\n" +
+                       "1:  Previous \n" +
+                       "2: Next \n" +
+                       "0: To Return to Main Menu");
+                    string input = Console.ReadLine();
+                    switch (input)
+                    {
+                        case "0":
+                            Console.Clear();
+                            Application.Start();
+                            break;
+                        case "1":
+                            Console.Clear();
+                            Console.WriteLine(playMusic.ElementAt(index - 1));
+                            break;
+                        case "2":
+                            Console.Clear();
+                            Console.WriteLine(playMusic.ElementAt(index + 1));
+                            break;
+                    }
+
                 }
 
             }
-
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+           
 
 
         }
