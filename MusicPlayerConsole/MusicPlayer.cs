@@ -149,7 +149,8 @@
 
                     }
 
-                    Console.WriteLine(playMusic.ElementAt(index));
+                    Console.WriteLine(playMusic[index]);
+                    
                     Console.WriteLine("\n \nEnter No:\n" +
                        "1:  Previous \n" +
                        "2: Next \n" +
@@ -162,12 +163,13 @@
                             Application.Start();
                             break;
                         case "1":
+                           
+                            Console.WriteLine(playMusic[index--]);
                             Console.Clear();
-                            Console.WriteLine(playMusic.ElementAt(index - 1));
                             break;
                         case "2":
                             Console.Clear();
-                            Console.WriteLine(playMusic.ElementAt(index + 1));
+                            Console.WriteLine(playMusic[index++]);
                             break;
                     }
 
