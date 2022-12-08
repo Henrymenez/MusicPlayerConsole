@@ -1,4 +1,6 @@
-﻿namespace MusicPlayerConsole
+﻿using System.Security;
+
+namespace MusicPlayerConsole
 {
     public class PlayList
     {
@@ -28,7 +30,7 @@
                     playlistindex.Add(song.Key);
                 }
                 Console.WriteLine("------------------ \n");
-                Console.Write("Display song in playlist: ");
+                Console.Write("Display song in playlist, Enter Playlist Id: ");
                 int index = int.Parse(Console.ReadLine());
                 DisplaySongInPlaylist(index);
             }
@@ -45,10 +47,11 @@
             {
                 int count = 0;
                 string currentPlaylist = playlistindex[index - 1];
+               
                 foreach (var item in myPlayLists[currentPlaylist])
                 {
                     count += 1;
-                    Console.WriteLine(count + ". " + item.Name);
+                    Console.WriteLine($"{count}. {item.Name} by {item.ArtistName}");
                 }
                 Console.WriteLine("------------------ \n");
             }
@@ -70,13 +73,28 @@
                 {
 
                     Console.WriteLine("Song Name: ");
-                    string name = Console.ReadLine();
+                    string? name = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(name))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Option can not be empty \n");
+                        Console.WriteLine("Song Name: ");
+                         name = Console.ReadLine();
+                    }
+
                     Console.WriteLine("Artist Name: ");
-                    string artistName = Console.ReadLine();
+                    string? artistName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(artistName))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Option can not be empty \n");
+                        Console.WriteLine("Artist Name: ");
+                        artistName = Console.ReadLine();
+                    }
                     count += 1;
                     playlistSongs.Add(new Song(count, name, artistName));
                     Console.WriteLine("Do you want to continue? y/n");
-                    string continueLoop = Console.ReadLine();
+                    string? continueLoop = Console.ReadLine();
                     if (continueLoop.ToLower() == "n")
                     {
                         break;

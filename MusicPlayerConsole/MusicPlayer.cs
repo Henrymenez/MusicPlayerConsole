@@ -22,7 +22,7 @@
             }
             Console.WriteLine("----------------------- \n");
             Console.WriteLine("Play song: \n 1. In exact order \n 2. Alphabetical order \n 3. Shuffle \n 0. Main Menu");
-            string playChoice = Console.ReadLine();
+            string? playChoice = Console.ReadLine();
             bool IsAlive = true;
             while (IsAlive)
             {
@@ -53,14 +53,13 @@
                 while (IsAlive)
                 {
                     Console.Write("Song Name: ");
-                    string name = Console.ReadLine();
+                    string? name = Console.ReadLine();
                     Console.Write("Artist Name: ");
-                    string artistName = Console.ReadLine();
+                    string? artistName = Console.ReadLine();
 
                     if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(artistName))
                     {
                         throw new InvalidInput("Invalid Input");
-
                     }
                     int newId = songs.Last().ID + 1;
                     songs.Add(new Song(newId, name, artistName));
@@ -101,14 +100,14 @@
                 Console.Write("Song Id you want to Edit: ");
                 int id = Convert.ToInt32(Console.ReadLine());
                 Console.Write("New Song Name: ");
-                string name = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new InvalidInput("Please Insert a valid input");
+                string? name = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    throw new InvalidInput("Please Insert a valid input");
 
-            }
-               Console.Write("New Artist Name: ");
-                string artistName = Console.ReadLine();
+                }
+                Console.Write("New Artist Name: ");
+                string? artistName = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(artistName))
                 {
                     throw new InvalidInput("Please Insert a valid input");
@@ -129,10 +128,10 @@
             {
                 Console.WriteLine(ex.Message + " Please Insert a valid input");
             }
-          /*  catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message + " Something went wrong");
-            }*/
+            /*  catch (Exception ex)
+              {
+                  Console.WriteLine(ex.Message + " Something went wrong");
+              }*/
 
         }
 
@@ -150,12 +149,12 @@
                     }
 
                     Console.WriteLine(playMusic[index]);
-                    
+
                     Console.WriteLine("\n \nEnter No:\n" +
                        "1:  Previous \n" +
                        "2: Next \n" +
                        "0: To Return to Main Menu");
-                    string input = Console.ReadLine();
+                    string? input = Console.ReadLine();
                     switch (input)
                     {
                         case "0":
@@ -163,9 +162,8 @@
                             Application.Start();
                             break;
                         case "1":
-                           
-                            Console.WriteLine(playMusic[index--]);
                             Console.Clear();
+                            Console.WriteLine(playMusic[index--]);
                             break;
                         case "2":
                             Console.Clear();
@@ -176,10 +174,11 @@
                 }
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
-           
+
 
 
         }

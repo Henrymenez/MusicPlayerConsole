@@ -2,7 +2,7 @@
 {
     public class Application
     {
-        public static string selectedChoice;
+        public static string? selectedChoice;
         public static void SelectOption()
         {
             Console.WriteLine("1. Show All Songs");
@@ -35,8 +35,6 @@
                 catch (InvalidInput ex)
                 {
                     Console.WriteLine(ex.Message + "Please select a valid option \n");
-
-                 
                 }
 
                 switch (selectedChoice)
@@ -62,6 +60,8 @@
                     case "7":
                         Console.WriteLine("Thank you, bye");
                         IsAlive = false;
+                        Thread.Sleep(2000);
+                       Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Please select valid option");
