@@ -1,4 +1,7 @@
-﻿namespace MusicPlayerConsole
+﻿using System;
+using System.Collections.Generic;
+
+namespace MusicPlayerConsole
 {
     public class MusicPlayer
     {
@@ -21,7 +24,7 @@
                 Console.WriteLine($"{count} {song.Name} by {song.ArtistName}");
             }
             Console.WriteLine("----------------------- \n");
-            Console.WriteLine("Play song: \n 1. In exact order \n 2. Alphabetical order \n 3. Shuffle \n 0. Main Menu");
+            Console.WriteLine("1: Play song  \n 0. Main Menu");
             string? playChoice = Console.ReadLine();
             bool IsAlive = true;
             while (IsAlive)
@@ -128,15 +131,38 @@
             {
                 Console.WriteLine(ex.Message + " Please Insert a valid input");
             }
-            /*  catch (Exception ex)
-              {
-                  Console.WriteLine(ex.Message + " Something went wrong");
-              }*/
+        }
+
+        public static void PlaySong()
+        {
+            Console.WriteLine("\n \n1: Play in exact order:\n" +
+                          "2:  Alphabetical order \n" +
+                          "3: Shuffle \n" +
+                          "0: To Return to Main Menu");
+            string? input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "0":
+                    Console.Clear();
+                    Application.Start();
+                    break;
+                case "1":
+                    PlaySongsInCorrectOrder();
+                    break;
+                case "2":
+                    ShuffleSongs();
+                    break;
+                default:
+                    PlaySongsInCorrectOrder();
+                    break;
+            }
 
         }
 
-        public static void PlaySong(int index = 0)
+        public static void PlaySongsInCorrectOrder()
         {
+            int index = 0;
             try
             {
                 List<string> playMusic = new List<string>();
@@ -145,31 +171,40 @@
                     foreach (Song song in songs)
                     {
                         playMusic.Add($"Now Playing {song.Name} by {song.ArtistName}");
-
                     }
 
-                    Console.WriteLine(playMusic[index]);
-
-                    Console.WriteLine("\n \nEnter No:\n" +
-                       "1:  Previous \n" +
-                       "2: Next \n" +
-                       "0: To Return to Main Menu");
-                    string? input = Console.ReadLine();
-                    switch (input)
+                    if (index >= 0 && index < playMusic.Count())
                     {
-                        case "0":
-                            Console.Clear();
-                            Application.Start();
-                            break;
-                        case "1":
-                            Console.Clear();
-                            Console.WriteLine(playMusic[index--]);
-                            break;
-                        case "2":
-                            Console.Clear();
-                            Console.WriteLine(playMusic[index++]);
-                            break;
+                        Console.WriteLine(playMusic[index]);
+                        Console.WriteLine("\n \nEnter No:\n" +
+                     "1:  Next \n" +
+                     "2: Previous \n" +
+                     "0: To Return to Main Menu");
+                        string? input = Console.ReadLine();
+
+                        switch (input)
+                        {
+                            case "0":
+                                Console.Clear();
+                                Application.Start();
+                                break;
+                            case "1":
+                                Console.Clear();
+                                playMusic[index] = playMusic[index++];
+                                break;
+                            case "2":
+                                Console.Clear();
+                                playMusic[index] = playMusic[index--];
+                                break;
+                        }
+
                     }
+                    else
+                    {
+                        Console.WriteLine("Out of range");
+                        PlaySongsInCorrectOrder();
+                    }
+
 
                 }
 
@@ -180,7 +215,54 @@
             }
 
 
+        }
 
+        public static void ShuffleSongs()
+        {
+            int index = 0;
+            var rnd = new Random();
+            List<string> playMusic = new List<string>();
+            while (true)
+            {
+                foreach (Song song in songs)
+                {
+                    playMusic.Add($"Now Playing {song.Name} by {song.ArtistName}");
+                }
+                var i = playMusic.Count();
+                string val = default(string);
+                while (i >= 1)
+                {
+                    i--;
+                    var nextIndex = rnd.Next(i, playMusic.Count());
+                    val = playMusic[nextIndex];
+                    //start swapping values
+                    playMusic[nextIndex] = playMusic[i];
+                    playMusic[i] = val;
+                }
+                Console.WriteLine(playMusic[index]);
+                Console.WriteLine("\n \nEnter No:\n" +
+                   "1:  Next \n" +
+                   "2: Previous \n" +
+                   "0: To Return to Main Menu");
+                string? input = Console.ReadLine();
+                switch (input)
+                {
+                    case "0":
+                        Console.Clear();
+                        Application.Start();
+                        break;
+                    case "1":
+                        Console.Clear();
+                        playMusic[index] = playMusic[index++];
+                        break;
+                    case "2":
+                        Console.Clear();
+                        playMusic[index] = playMusic[index--];
+                        break;
+                }
+            }
+                
+           
         }
 
     }

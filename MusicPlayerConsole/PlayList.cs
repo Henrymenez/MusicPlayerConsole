@@ -107,10 +107,6 @@ namespace MusicPlayerConsole
                 Console.WriteLine(ex.Message);
             }
             return playlistSongs;
-
-
-
-
         }
 
         public static void createPlaylist()
@@ -119,7 +115,7 @@ namespace MusicPlayerConsole
             {
                 Console.Clear();
                 Console.WriteLine("Playlist name: ");
-                string playlistName = Console.ReadLine();
+                string? playlistName = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(playlistName))
                 {
                     throw new InvalidInput("Invalid input");
